@@ -1,3 +1,42 @@
 A simple class to create string query.
 
 example of the usage:
+* Usage:
+* Query.select(DBMS.DBMS_MYSQL,"name").from("people").where("name like '%romo%'").toString();
+* will result "select name from people where name like '%romo%' "
+
+* Usage:
+* String [] tAttributes = {"name", "age"};
+* String [] tTables = {"people", "people_detail"};
+* QuerySelect result = Query.select(DBMS.DBMS_MYSQL, tAttributes).from(tTables).where("name like '%romo%'").toString();
+* will result "select name , age from people , people_detail where name like '%romo%' "
+
+* Usage:
+* Query.update(DBMS.DBMS_MYSQL, "people").set("first_name", "'romo'").where("id = 1").toString();
+* will result "update people set first_name = 'romo' where id = 1"
+
+* usage:
+* String[][] tMapValue = { {"first_name","'romo'"} , {"last_name","'alen'"}};
+* Query.updateMap(DBMS.DBMS_MYSQL,"area", tMapValue,"id = 4").toString();
+* will result "update area set first_name = 'romo',last_name = 'alen' where id = 4"
+
+* usage:
+* String [] tAttributes = {"first_name", "last_name"};
+* String [] tValues = {"'romo'", "'alen'"};
+* Query.insertInto(DBMS.DBMS_MYSQL,"area").values(tAttributes, tValues).toString();
+* will result: "insert into area(first_name,last_name) values ('romo','alen')"
+
+* usage:
+* String[][] tMapValue = { {"first_name","'romo'"} , {"last_name","'alen'"}};
+* Query.insert(DBMS.DBMS_MYSQL, "area", tMapValue).toString();
+* will result: "insert into area(first_name,last_name) values ('romo','alen')"
+
+* usage:
+* String[] tAttributes = {"first_name","last_name"};
+* String[][] tValues = { {"'romo'","'alen'"} ,
+*                        {"'yel'","'sico'"},
+*                        {"'tri'","'dera'"}
+*                      };
+* Query.inserts(DBMS.DBMS_MYSQL,"area",tAttributes, tValues).toString();
+* will result "insert into area(name,filename) values ('romo','alen'),
+*                     ('yel','sico'),('tri','dera')"
